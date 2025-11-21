@@ -11,7 +11,7 @@ COLOR_3 = '#FF0000'  # Red
 BACKGROUND_COLOR = '#FFFEF7'  # Very light grey 
 FONT_FAMILY = 'Courier New'  # Font
 FONT_SIZE = '48px'  # Font size
-DEFAULT_CONTRAST = 1.5
+DEFAULT_CONTRAST = 1
 
 def adjust_color_contrast(hex_color, contrast):
     """
@@ -69,7 +69,7 @@ def hello_world():
     adjusted_color3 = adjust_color_contrast(COLOR_3, contrast)
     
     # Add these lines after the adjust_color_contrast calls
-print(f"Adjusted colors: {adjusted_color1}, {adjusted_color2}, {adjusted_color3}")
+
     return render_template('index.html',
                          part1=part1,
                          part2=part2,
