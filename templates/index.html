@@ -13,10 +13,6 @@
         
         body {
             background-color: {{ bg_color }};
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             font-family: "{{ font_family }}";
         }
@@ -29,12 +25,14 @@
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
         
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
+            margin-bottom: 15px;
         }
         
         label {
@@ -56,47 +54,88 @@
             font-size: {{ font_size }};
             text-align: left;
             padding: 40px;
-            max-width: 90%;
+            padding-right: 280px;
+            max-width: 100%;
             white-space: pre-wrap;
             word-wrap: break-word;
+            line-height: 1.5;
         }
-        
-        .color1 { color: {{ color1 }}; }
-        .color2 { color: {{ color2 }}; }
-        .color3 { color: {{ color3 }}; }
     </style>
 </head>
 <body>
     <div class="controls">
         <div class="control-group">
-            <label>Text Contrast</label>
+            <label>Color 1 Contrast (Black)</label>
             <input type="range"
-                   id="contrast"
+                   id="contrast1"
                    min="0"
                    max="2"
                    step="0.1"
-                   value="{{ contrast }}">
+                   value="{{ contrast1 }}">
             <span class="value-display">
-                Value: <span id="contrastValue">{{ contrast }}</span>
+                Value: <span id="contrast1Value">{{ contrast1 }}</span>
+            </span>
+        </div>
+        
+        <div class="control-group">
+            <label>Color 2 Contrast (Cyan)</label>
+            <input type="range"
+                   id="contrast2"
+                   min="0"
+                   max="2"
+                   step="0.1"
+                   value="{{ contrast2 }}">
+            <span class="value-display">
+                Value: <span id="contrast2Value">{{ contrast2 }}</span>
+            </span>
+        </div>
+        
+        <div class="control-group">
+            <label>Color 3 Contrast (Red)</label>
+            <input type="range"
+                   id="contrast3"
+                   min="0"
+                   max="2"
+                   step="0.1"
+                   value="{{ contrast3 }}">
+            <span class="value-display">
+                Value: <span id="contrast3Value">{{ contrast3 }}</span>
             </span>
         </div>
     </div>
     
-   <div class="text-container">
-    {% for word, color in colored_words %}
-        <span style="color: {{ color }}">{{ word }}</span> 
-    {% endfor %}
-</div>
-
+    <div class="text-container">{% for word, color in colored_words %}{% if loop.index > 1 %} {% endif %}<span style="color: {{ color }};">{{ word }}</span>{% endfor %}</div>
     
     <script>
-        const contrastSlider = document.getElementById('contrast');
-        const contrastValue = document.getElementById('contrastValue');
+        const contrast1Slider = document.getElementById('contrast1');
+        const contrast1Value = document.getElementById('contrast1Value');
+        const contrast2Slider = document.getElementById('contrast2');
+        const contrast2Value = document.getElementById('contrast2Value');
+        const contrast3Slider = document.getElementById('contrast3');
+        const contrast3Value = document.getElementById('contrast3Value');
         
-        contrastSlider.addEventListener('input', function() {
-            contrastValue.textContent = this.value;
-            window.location.href = '?contrast=' + this.value;
+        contrast1Slider.addEventListener('input', function() {
+            contrast1Value.textContent = this.value;
+            updateURL();
         });
+        
+        contrast2Slider.addEventListener('input', function() {
+            contrast2Value.textContent = this.value;
+            updateURL();
+        });
+        
+        contrast3Slider.addEventListener('input', function() {
+            contrast3Value.textContent = this.value;
+            updateURL();
+        });
+        
+        function updateURL() {
+            const params = new URLSearchParams();
+            params.set('contrast1', contrast1Slider.value);
+            params.set('contrast2', contrast2Slider.value);
+            params.set('contrast3', contrast3Slider.value);
+            window.location.href = '?' + params.toString();
+        }
     </script>
 </body>
 </html>
