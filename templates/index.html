@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Color Text Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #FFFEF7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Courier New;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        input[type="range"] {
+            width: 200px;
+        }
+        
+        .value-display {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .text-container {
+            font-size: 48px;
+            text-align: center;
+            padding: 40px;
+            max-width: 90%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .color1 { color: #323232; }
+        .color2 { color: #32ffff; }
+        .color3 { color: #ff3232; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label>Text Contrast</label>
+            <input type="range" id="contrast" min="0" max="2" step="0.1" value="0.8">
+            <span class="value-display">Value: <span id="contrastValue">0.8</span></span>
+        </div>
+    </div>
+    
+    <div class="text-container">
+        <span class="color1">Hello Vss demo parody song yyyy  jjkkkkk  ooslslsmsnhs </span><span class="color2"> bbajjsjsjs
+ppl oojndnb gffaab  wrrfsv s xz  znnxnz nsb</span><span class="color3">d nsajsbmnsdcmsbmcmcsdmsdmdmcsdmscdmncsdmncm
+hhsansn nn</span>
+    </div>
+    
+    <script>
+        const contrastSlider = document.getElementById('contrast');
+        const contrastValue = document.getElementById('contrastValue');
+        
+        contrastSlider.addEventListener('input', function() {
+            contrastValue.textContent = this.value;
+            window.location.href = '?contrast=' + this.value;
+        });
+    </script>
+
+</body></html>
