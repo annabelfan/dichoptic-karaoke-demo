@@ -9,6 +9,12 @@ On Windows: venv\Scripts\activate
 
 
 python -m venv venv
-# activate as above
+# activate as above, on vs code you do this through the UI/automatically
 pip install -r requirements.txt
+
+2) Start up the flask app:
+In terminal: python dikaro-web-app.py
+Open webpage
+Use Ctrl + C to stop the server
+
 
