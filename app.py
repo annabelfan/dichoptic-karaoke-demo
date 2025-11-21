@@ -30,7 +30,7 @@ lyrics_data = read_lyrics_csv(lyrics_folder + song_filename)
 @app.route("/")
 def index():
     return render_template(
-        "_index.html",
+        "index.html",
         adjusted_colours = adjusted_colours,
         bg_color=BACKGROUND_COLOR,
         font_family=FONT_FAMILY,
