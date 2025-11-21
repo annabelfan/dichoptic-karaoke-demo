@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Color Text Display</title>
-
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            background-color: #FFFEF7;
+            background-color: {{ bg_color }};
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: "Courier New";
+            font-family: "{{ font_family }}";
         }
-
+        
         .controls {
             position: fixed;
             top: 20px;
@@ -29,65 +28,70 @@
             background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
+        
         label {
             font-size: 14px;
             color: #333;
             font-weight: bold;
         }
-
+        
         input[type="range"] {
             width: 200px;
         }
-
+        
         .value-display {
             font-size: 12px;
             color: #666;
         }
-
+        
         .text-container {
-            font-size: 48px;
+            font-size: {{ font_size }};
             text-align: center;
             padding: 40px;
             max-width: 90%;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-
-        .color1 { color: #323232; }
-        .color2 { color: #32ffff; }
-        .color3 { color: #ff3232; }
+        
+        .color1 { color: {{ color1 }}; }
+        .color2 { color: {{ color2 }}; }
+        .color3 { color: {{ color3 }}; }
     </style>
 </head>
-
 <body>
     <div class="controls">
         <div class="control-group">
             <label>Text Contrast</label>
-            <input type="range" id="contrast" min="0" max="2" step="0.1" value="0.8">
-            <span class="value-display">Value: <span id="contrastValue">0.8</span></span>
+            <input type="range"
+                   id="contrast"
+                   min="0"
+                   max="2"
+                   step="0.1"
+                   value="{{ contrast }}">
+            <span class="value-display">
+                Value: <span id="contrastValue">{{ contrast }}</span>
+            </span>
         </div>
     </div>
-
+    
     <div class="text-container">
-        <span class="color1">Woke up slow, but you hit like a double shot</span>
-        <span class="color2">Running through my veins, baby, you’re a little too hot xz znnxnz nsb </span>
-        <span class="color3">Bittersweet kiss,yeah you’re trouble I can’t forget
-Sip of your smile and I’m already in deep—no regrets</span>
-    </div
-
+        <span class="color1">{{ part1 }}</span>
+        <span class="color2">{{ part2 }}</span>
+        <span class="color3">{{ part3 }}</span>
+    </div>
+    
     <script>
         const contrastSlider = document.getElementById('contrast');
         const contrastValue = document.getElementById('contrastValue');
-
+        
         contrastSlider.addEventListener('input', function() {
             contrastValue.textContent = this.value;
             window.location.href = '?contrast=' + this.value;
