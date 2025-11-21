@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Color Text Display</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             background-color: {{ bg_color }};
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
             font-family: "{{ font_family }}";
+            padding-top: 120px; /* leave space for slider */
         }
-        
+
         .controls {
             position: fixed;
             top: 20px;
@@ -30,43 +32,41 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
+
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-        
+
         label {
             font-size: 14px;
             color: #333;
             font-weight: bold;
         }
-        
+
         input[type="range"] {
             width: 200px;
         }
-        
+
         .value-display {
             font-size: 12px;
             color: #666;
         }
-        
+
         .text-container {
             font-size: {{ font_size }};
-            text-align: center;
-            padding: 40px;
             max-width: 90%;
             white-space: pre-wrap;
             word-wrap: break-word;
+            text-align: left;
+            line-height: 1.4;
         }
-        
-        .color1 { color: {{ color1 }}; }
-        .color2 { color: {{ color2 }}; }
-        .color3 { color: {{ color3 }}; }
     </style>
 </head>
 <body>
+
+    <!-- Contrast Slider -->
     <div class="controls">
         <div class="control-group">
             <label>Text Contrast</label>
@@ -81,21 +81,23 @@
             </span>
         </div>
     </div>
-    
+
+    <!-- Random Colored Words -->
     <div class="text-container">
-        <span class="color1">{{ part1 }}</span>
-        <span class="color2">{{ part2 }}</span>
-        <span class="color3">{{ part3 }}</span>
+        {% for word, color in colored_words %}
+            <span style="color: {{ color }}">{{ word }}</span>
+        {% endfor %}
     </div>
-    
+
     <script>
         const contrastSlider = document.getElementById('contrast');
         const contrastValue = document.getElementById('contrastValue');
-        
+
         contrastSlider.addEventListener('input', function() {
             contrastValue.textContent = this.value;
             window.location.href = '?contrast=' + this.value;
         });
     </script>
+
 </body>
 </html>
