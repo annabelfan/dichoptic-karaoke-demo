@@ -14,7 +14,7 @@
         body {
             background-color: {{ bg_color }};
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -54,7 +54,7 @@
         
         .text-container {
             font-size: {{ font_size }};
-            text-align: center;
+            text-align: left;
             padding: 40px;
             max-width: 90%;
             white-space: pre-wrap;
@@ -82,11 +82,12 @@
         </div>
     </div>
     
-    <div class="text-container">
-        <span class="color1">{{ part1 }}</span>
-        <span class="color2">{{ part2 }}</span>
-        <span class="color3">{{ part3 }}</span>
-    </div>
+   <div class="text-container">
+    {% for word, color in colored_words %}
+        <span style="color: {{ color }}">{{ word }}</span> 
+    {% endfor %}
+</div>
+
     
     <script>
         const contrastSlider = document.getElementById('contrast');
