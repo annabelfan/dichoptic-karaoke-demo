@@ -16,7 +16,6 @@ def index():
 @app.route("/api/lyrics")
 def get_all_lyrics():
     """API endpoint that returns all lyrics data at once"""
-    print(lyrics_data)
     return jsonify(lyrics_data)
 
 if __name__ == "__main__":
